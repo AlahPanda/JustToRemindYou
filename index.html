@@ -287,7 +287,16 @@
         <button id="open">Abrir Envelope</button>
         <button id="reset"> Fechar Envelope</button>
     </div>
-
+    <audio id="musica" src="https://cdn.jsdelivr.net/gh/AlahPanda/JustToRemindYou@main/%C3%B8neheart%20x%20reidenshi%20-%20snowfall.mp3" loop></audio>
+    <script>
+    document.addEventListener("click", function() {
+        let musica = document.getElementById("musica");
+        if (musica.paused) {
+            musica.play().catch(error => console.log("Autoplay bloqueado: " + error));
+        }
+    }, { once: true });
+    </script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -307,6 +316,26 @@
                 envelope.removeClass("open").addClass("close");
             }
         });
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function calcularDiasRestantes() {
+            const hoje = new Date(); // Data de hoje
+            const dataFinal = new Date(hoje.getFullYear(), 4, 19); // 19 de maio (mês 4 porque janeiro é 0)
+
+            // Se já passou deste ano, usa o próximo ano
+            if (hoje > dataFinal) {
+                dataFinal.setFullYear(hoje.getFullYear() + 1);
+            }
+
+            const diferenca = Math.ceil((dataFinal - hoje) / (1000 * 60 * 60 * 24)); // Diferença em dias
+
+            // Atualiza o texto no HTML
+            document.querySelector(".message p:nth-child(2)").innerHTML = `daqui ${diferenca} dias &lt;3`;
+        }
+
+        calcularDiasRestantes(); // Executa a função ao carregar a página
+    });
     </script>
 </body>
 </html>
